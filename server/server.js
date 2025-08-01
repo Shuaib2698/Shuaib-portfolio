@@ -15,7 +15,9 @@ mongoose.connect(process.env.MONGODB_URI)
   .catch(err => console.error('MongoDB connection error:', err));
 
 // Routes
+app.use('/api', require('./routes/authRoutes'));
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/admin', require('./routes/authRoutes')); // For admin verification
 app.use('/api/experiences', require('./routes/experienceRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api/education', require('./routes/educationRoutes'));

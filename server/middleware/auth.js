@@ -1,17 +1,20 @@
+// middleware/auth.js
 const jwt = require('jsonwebtoken');
 
-module.exports = async (req, res, next) => {
-  try {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
-    
-    if (!token) {
-      return res.status(401).json({ error: 'No token provided' });
-    }
+module.exports = function (req, res, next) {
+  // Get token from header
+  const token = req.header('Authorization')?.replace('Bearer ', '');
+  
+  if (!token) {
+    return res.status(401).json({ error: 'Access denied. No token provided.' });
+  }
 
+  try {
+    // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.adminId = decoded.id;
+    req.user = decoded;
     next();
   } catch (error) {
-    res.status(401).json({ error: 'Not authorized to access this resource' });
+    res.status(400).json({ error: 'Invalid token.' });
   }
 };
