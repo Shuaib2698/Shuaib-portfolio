@@ -6,16 +6,31 @@ export default function AdminLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError('');
+    
     try {
-      const response = await axios.post('/api/admin/login', { username, password });
-      localStorage.setItem('token', response.data.token);
-      navigate('/admin/dashboard');
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/login`,
+        { username, password }
+      );
+      
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        navigate('/admin/dashboard');
+      } else {
+        throw new Error('No token received');
+      }
     } catch (err) {
-      setError(err.response?.data?.error || 'Login failed');
+      setError(err.response?.data?.error || err.message || 'Login failed');
+      console.error('Login error:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -49,9 +64,10 @@ export default function AdminLogin() {
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-black text-white rounded hover:bg-gray-800"
+            className="w-full py-2 px-4 bg-black text-white rounded hover:bg-gray-800 disabled:opacity-50"
+            disabled={isLoading}
           >
-            Login
+            {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
       </div>
