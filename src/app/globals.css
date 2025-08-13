@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 0, 0, 0; /* Pure black background */
+  --primary-color: 0, 255, 255; /* Cyan color (#00ffff) */
+  --secondary-color: 0, 200, 200; /* Slightly darker cyan */
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+/* Section styling */
+.section {
+  @apply py-16 px-4 sm:px-8 lg:px-16 bg-black;
+}
+
+/* Navbar link hover effect */
+.nav-link {
+  @apply relative text-[#ADB7BE] hover:text-[rgb(var(--primary-color))] transition-colors duration-300;
+}
+
+.nav-link::after {
+  @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-[rgb(var(--primary-color))] transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+/* Button styling */
+.btn-cyan {
+  @apply bg-[rgb(var(--primary-color))] text-black font-bold py-3 px-6 rounded-full 
+         hover:bg-[rgba(var(--primary-color),0.8)] hover:shadow-[0_0_15px_rgba(var(--primary-color),0.6)] 
+         transition-all duration-300;
+}
+
+/* Project card styling */
+.project-card {
+  @apply bg-[#111] border border-[#222] rounded-lg overflow-hidden 
+         hover:border-[rgb(var(--primary-color))] hover:shadow-[0_0_15px_rgba(var(--primary-color),0.3)]
+         transition-all duration-300;
+}
+/* Add this to globals.css */
+.section-box {
+  @apply bg-[rgba(0,239,255,0.05)] p-8 rounded-xl border border-[rgba(0,239,255,0.1)] 
+         hover:shadow-[0_0_15px_rgba(0,239,255,0.2)] transition-all duration-300;
+}
