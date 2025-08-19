@@ -17,7 +17,7 @@ const HeroSection = () => {
           className="col-span-8 place-self-center text-center sm:text-left justify-self-start"
         >
           <h1 className="text-white mb-4 text-3xl sm:text-4xl lg:text-6xl font-extrabold">
-            Hello, I'm Shaik Shuaib Ahmed
+            Hello, I am Shaik Shuaib Ahmed
             <br />
             <TypeAnimation
               sequence={[
