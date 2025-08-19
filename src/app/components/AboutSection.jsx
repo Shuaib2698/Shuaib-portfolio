@@ -13,6 +13,11 @@ const TAB_DATA = [
           R N S Institute of Technology — B.E. in Computer Science & Engineering
           (2021 – 2024) | CGPA: 7.20
         </li>
+        <br></br>
+        <li>
+          M S Polytechnic — Diploma in Computer Science <br></br>
+          (2018 – 2021) | Percentage: 80.4%
+        </li>
       </ul>
     ),
   },
@@ -20,7 +25,7 @@ const TAB_DATA = [
     title: "Certifications",
     id: "certifications",
     content: (
-      <p>No certifications listed yet.</p>
+      <p >MySQL.</p>
     ),
   },
 ];

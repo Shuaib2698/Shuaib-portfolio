@@ -4,7 +4,7 @@ import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram, FaFacebook } from "react-icons/fa";
 
 const HeroSection = () => {
   return (
@@ -63,25 +63,32 @@ const HeroSection = () => {
           </div>
           <div className="socials flex flex-row gap-4 mt-6 justify-center sm:justify-start">
             <Link 
-              href="https://github.com" 
+              href="https://github.com/Shuaib2698" 
               target="_blank"
               className="w-12 h-12 rounded-full border-2 border-[rgb(0,255,255)] flex items-center justify-center text-[rgb(0,255,255)] hover:bg-[rgb(0,255,255)] hover:text-black transition-all duration-300"
             >
               <FaGithub size={24} />
             </Link>
             <Link 
-              href="https://linkedin.com" 
+              href="https://www.linkedin.com/in/shaik-shuaib-ahmed-b01459128" 
               target="_blank"
               className="w-12 h-12 rounded-full border-2 border-[rgb(0,255,255)] flex items-center justify-center text-[rgb(0,255,255)] hover:bg-[rgb(0,255,255)] hover:text-black transition-all duration-300"
             >
               <FaLinkedin size={24} />
             </Link>
             <Link 
-              href="https://instagram.com" 
+              href="https://www.instagram.com/shuaib9845" 
               target="_blank"
               className="w-12 h-12 rounded-full border-2 border-[rgb(0,255,255)] flex items-center justify-center text-[rgb(0,255,255)] hover:bg-[rgb(0,255,255)] hover:text-black transition-all duration-300"
             >
               <FaInstagram size={24} />
+            </Link>
+            <Link 
+              href="https://www.facebook.com/profile.php?id=100007007058045" 
+              target="_blank"
+              className="w-12 h-12 rounded-full border-2 border-[rgb(0,255,255)] flex items-center justify-center text-[rgb(0,255,255)] hover:bg-[rgb(0,255,255)] hover:text-black transition-all duration-300"
+            >
+              <FaFacebook size={24} />
             </Link>
           </div>
         </motion.div>
