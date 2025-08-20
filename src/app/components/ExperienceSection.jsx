@@ -40,19 +40,19 @@ const ExperienceSection = () => {
   return (
     <section id="experience" className="section-box py-16 px-4 sm:px-8 lg:px-16">
       <h2 className="text-4xl font-bold mb-12 text-center">
-        Professional <span className="text-[rgb(0,255,255)]">Experience</span>
+        Professional <span className="text-[rgb(var(--primary-color))]">Experience</span>
       </h2>
       
       <div className="max-w-4xl mx-auto space-y-12">
         {experiences.map((exp, idx) => (
-          <div key={idx} className="pl-8 border-l-2 border-[rgb(0,255,255)] relative">
-            <div className="absolute -left-[9px] w-4 h-4 rounded-full bg-[rgb(0,255,255)] border-4 border-black"></div>
-            <div className="text-[rgb(0,255,255)] font-semibold mb-1">{exp.date}</div>
-            <h3 className="text-2xl font-bold text-[rgb(0,255,255)]">{exp.role}</h3>
+          <div key={idx} className="pl-8 border-l-2 border-[rgb(var(--primary-color))] relative">
+            <div className="absolute -left-[9px] w-4 h-4 rounded-full bg-[rgb(var(--primary-color))] border-4 border-black"></div>
+            <div className="text-[rgb(var(--primary-color))] font-semibold mb-1">{exp.date}</div>
+            <h3 className="text-2xl font-bold text-[rgb(var(--primary-color))]">{exp.role}</h3>
             <h4 className="text-lg font-medium mb-4">{exp.company}</h4>
             <ul className="space-y-2">
               {exp.details.map((item, i) => (
-                <li key={i} className="relative pl-4 before:content-['-'] before:absolute before:left-0 before:text-[rgb(0,255,255)]">
+                <li key={i} className="relative pl-4 before:content-['-'] before:absolute before:left-0 before:text-[rgb(var(--primary-color))]">
                   {item}
                 </li>
               ))}

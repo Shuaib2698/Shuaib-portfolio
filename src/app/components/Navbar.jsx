@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link 
           href="#home" 
-          className="text-2xl font-bold text-[rgb(0,255,255)] hover:text-[rgba(0,255,255,0.8)] transition-colors duration-300"
+          className="text-2xl font-bold text-[rgb(var(--primary-color))] hover:text-[rgba(var(--primary-color),0.8)] transition-colors duration-300"
         >
           Portfolio
         </Link>
@@ -40,7 +40,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={() => setNavbarOpen(!navbarOpen)}
-            className="text-[rgb(0,255,255)]"
+            className="text-[rgb(var(--primary-color))]"
           >
             {navbarOpen ? (
               <XMarkIcon className="h-6 w-6" />

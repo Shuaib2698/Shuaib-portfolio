@@ -17,7 +17,7 @@ const HeroSection = () => {
           className="col-span-8 place-self-center text-center sm:text-left justify-self-start"
         >
           <h1 className="text-white mb-4 text-3xl sm:text-4xl lg:text-6xl font-extrabold">
-            Hello, I am Shaik Shuaib Ahmed
+            Hello, I&#39;m Shaik Shuaib Ahmed
             <br />
             <TypeAnimation
               sequence={[
@@ -29,11 +29,11 @@ const HeroSection = () => {
                 1000,
               ]}
               wrapper="span"
-              speed={50}
+              speed={150}
               style={{ 
                 fontSize: '1em',
                 display: 'inline-block',
-                color: 'rgb(0, 255, 255)'
+                color: 'rgba(32, 220, 35, 1)'
               }}
               repeat={Infinity}
             />
@@ -54,7 +54,7 @@ const HeroSection = () => {
               href="/Shuaib_Ahmed_resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-[rgb(0,255,255)] hover:bg-[rgba(0,255,255,0.8)]"
+              className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-[rgb(var(--primary-color))] hover:bg-[rgba(var(--primary-color),0.8)]"
             >
               <span className="block bg-black hover:bg-[#111] rounded-full px-5 py-2 text-white transition-all duration-300">
                 Download CV
@@ -65,28 +65,28 @@ const HeroSection = () => {
             <Link 
               href="https://github.com/Shuaib2698" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(0,255,255)] flex items-center justify-center text-[rgb(0,255,255)] hover:bg-[rgb(0,255,255)] hover:text-black transition-all duration-300"
+              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaGithub size={24} />
             </Link>
             <Link 
               href="https://www.linkedin.com/in/shaik-shuaib-ahmed-b01459128" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(0,255,255)] flex items-center justify-center text-[rgb(0,255,255)] hover:bg-[rgb(0,255,255)] hover:text-black transition-all duration-300"
+              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaLinkedin size={24} />
             </Link>
             <Link 
               href="https://www.instagram.com/shuaib9845" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(0,255,255)] flex items-center justify-center text-[rgb(0,255,255)] hover:bg-[rgb(0,255,255)] hover:text-black transition-all duration-300"
+              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaInstagram size={24} />
             </Link>
             <Link 
               href="https://www.facebook.com/profile.php?id=100007007058045" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(0,255,255)] flex items-center justify-center text-[rgb(0,255,255)] hover:bg-[rgb(0,255,255)] hover:text-black transition-all duration-300"
+              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaFacebook size={24} />
             </Link>
@@ -96,16 +96,38 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="col-span-4 place-self-center mt-8 lg:mt-0"
+          className="col-span-4 place-self-center mt-8 lg:mt-0 relative"
         >
-          <div className="rounded-full bg-[#111] w-[250px] h-[250px] lg:w-[350px] lg:h-[350px] relative overflow-hidden border-4 border-[rgb(0,255,255)]">
-            <Image
-              src="/images/hero-image.png"
-              alt="hero image"
-              className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              width={300}
-              height={300}
-            />
+          {/* Main image container with rotating circular bars */}
+          <div className="relative w-[300px] h-[300px] lg:w-[450px] lg:h-[450px] mx-auto">
+            {/* First circular bar - starts from top */}
+            <div className="absolute inset-0 rounded-full overflow-hidden">
+              <div className="absolute inset-0 rounded-full border-4 border-transparent 
+                              border-t-[rgb(var(--primary-color))] border-r-transparent border-b-transparent border-l-transparent
+                              animate-spin-slow"></div>
+            </div>
+            
+            {/* Second circular bar - starts from bottom (rotated 180deg) */}
+            <div className="absolute inset-0 rounded-full overflow-hidden">
+              <div className="absolute inset-0 rounded-full border-4 border-transparent 
+                              border-b-[rgb(var(--primary-color))] border-t-transparent border-r-transparent border-l-transparent
+                              animate-spin-slow opacity-70"
+                   style={{ transform: 'rotate(180deg)' }}></div>
+            </div>
+            
+            {/* Image container with matching background */}
+            <div className="absolute inset-4 rounded-full bg-[rgba(0,239,255,0.01)] overflow-hidden">
+              <div className="w-full h-full flex items-center justify-center bg-transparent">
+                <Image
+                  src="/images/hero-image.png"
+                  alt="hero image"
+                  className="object-contain w-full h-full"
+                  width={450}
+                  height={450}
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

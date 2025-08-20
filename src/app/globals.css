@@ -3,15 +3,55 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-rgb: 0, 0, 0; /* Pure black background */
-  --primary-color: 0, 255, 255; /* Cyan color (#00ffff) */
-  --secondary-color: 0, 200, 200; /* Slightly darker cyan */
+--foreground-rgb: 255, 255, 255;
+--background-rgb: 0, 0, 0; /* Pure black background */
+--primary-color: 32, 220, 35; /* New green color (rgba(32, 220, 35, 1)) */
+--secondary-color: 25, 176, 28; /* Slightly darker green */
 }
 
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+}
+
+/* Custom animations for circular border */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slow-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes spin-medium {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 12s linear infinite;
+}
+
+.animate-spin-medium {
+  animation: spin-medium 6s linear infinite;
 }
 
 /* Section styling */
