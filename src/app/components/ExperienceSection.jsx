@@ -79,8 +79,8 @@ const ExperienceSection = () => {
                   </div>
                 </div>
 
-                {/* Content box - Always left aligned */}
-                <div className="w-full md:w-1/2 md:pl-8 text-left">
+                {/* Content box */}
+                <div className={`w-full md:w-1/2 ${idx % 2 === 0 ? 'md:pl-8' : 'md:pr-8'} ${idx % 2 === 0 ? 'md:text-left' : 'md:text-left'}`}>
                   <div className="experience-card p-6 rounded-xl bg-gradient-to-br from-[rgba(32,220,35,0.05)] to-[rgba(32,220,35,0.02)] border border-[rgba(32,220,35,0.2)] hover:border-[rgba(32,220,35,0.5)] hover:shadow-[0_0_25px_rgba(32,220,35,0.15)] transition-all duration-500 transform hover:-translate-y-1">
                     <div className="text-[rgb(var(--primary-color))] font-semibold text-sm mb-2">{exp.date}</div>
                     <h3 className="text-xl font-bold text-white mb-1">{exp.role}</h3>
