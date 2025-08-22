@@ -51,30 +51,30 @@ const EmailSection = () => {
         </p>
         <div className="socials flex flex-row gap-4">
           <Link 
-              href="https://github.com/Shuaib2698" 
-              target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
-            >
-              <FaGithub size={24} />
-            </Link>
+  href="https://github.com/Shuaib2698" 
+  target="_blank"
+  className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
+>
+  <FaGithub size={24} />
+</Link>
             <Link 
               href="https://www.linkedin.com/in/shaik-shuaib-ahmed-b01459128" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
+              className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaLinkedin size={24} />
             </Link>
             <Link 
               href="https://www.instagram.com/shuaib9845" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
+              className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaInstagram size={24} />
             </Link>
             <Link 
               href="https://www.facebook.com/profile.php?id=100007007058045" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
+              className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaFacebook size={24} />
             </Link>
@@ -134,11 +134,11 @@ const EmailSection = () => {
               />
             </div>
             <button
-              type="submit"
-              className="bg-[rgb(var(--primary-color))] hover:bg-[rgba(var(--primary-color),0.8)] text-black font-bold py-2.5 px-5 rounded-lg w-full hover:shadow-[0_0_15px_rgba(var(--primary-color),0.6)] transition-all duration-300"
-            >
-              Send Message
-            </button>
+  type="submit"
+  className="btn-hover-animation bg-[rgb(var(--primary-color))] hover:bg-[rgba(var(--primary-color),0.8)] text-black font-bold py-2.5 px-5 rounded-lg w-full hover:shadow-[0_0_15px_rgba(var(--primary-color),0.6)] transition-all duration-300"
+>
+  Send Message
+</button>
           </form>
         )}
       </div>

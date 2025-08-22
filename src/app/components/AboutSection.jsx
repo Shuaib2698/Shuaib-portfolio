@@ -47,9 +47,7 @@ const AboutSection = () => {
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-3xl font-bold text-white mb-4">About Me</h2>
           <p className="text-sm lg:text-base">
-            I am a Full Stack Developer with experience in Python, Django, MERN stack, and
-            modern web technologies. I enjoy creating efficient, scalable, and interactive
-            applications that solve real-world problems.
+            Hi, I’m Shuaib, a full-stack developer from Bangalore with a background in Computer Science Engineering. Over the past 8 months, I’ve worked as a Python Developer and gained 4 months of experience with the MERN stack. I enjoy building end-to-end applications and have created projects like a company management system using Next.js, as well as a job portal and a social media platform. My passion lies in crafting efficient, user-friendly solutions, and my long-term goal is to establish my own startup to bring innovative ideas to life.
           </p>
           <div className="flex flex-row justify-start mt-8">
             {TAB_DATA.map((tabBtn) => (

@@ -39,23 +39,22 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-sm sm:text-base mb-6 lg:text-lg">
-            Full Stack Developer specializing in Python, Django, React, and the
-            MERN stack. Passionate about building scalable, efficient, and
-            user-friendly applications that make a difference.
+            Full-Stack Developer with 1 year of professional experience in Python (Django) and MERN stack development. Skilled in building scalable web applications, optimizing system performance, and collaborating in team-based projects. Seeking to leverage technical expertise and hands-on project experience to contribute to impactful software solutions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="/#contact"
-              className="btn-cyan"
-            >
-              Hire Me
-            </Link>
-            <Link
-              href="/Shuaib_Ahmed_resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-[rgb(var(--primary-color))] hover:bg-[rgba(var(--primary-color),0.8)]"
-            >
+<Link
+  href="/#contact"
+  className="btn-cyan btn-hover-animation"
+>
+  Hire Me
+</Link>
+
+<Link
+  href="/Shuaib_Ahmed_resume.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-[rgb(var(--primary-color))] hover:bg-[rgba(var(--primary-color),0.8)] btn-hover-animation"
+>
               <span className="block bg-black hover:bg-[#111] rounded-full px-5 py-2 text-white transition-all duration-300">
                 Download CV
               </span>
@@ -65,28 +64,28 @@ const HeroSection = () => {
             <Link 
               href="https://github.com/Shuaib2698" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
+              className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaGithub size={24} />
             </Link>
             <Link 
               href="https://www.linkedin.com/in/shaik-shuaib-ahmed-b01459128" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
+              className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaLinkedin size={24} />
             </Link>
             <Link 
               href="https://www.instagram.com/shuaib9845" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
+              className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaInstagram size={24} />
             </Link>
             <Link 
               href="https://www.facebook.com/profile.php?id=100007007058045" 
               target="_blank"
-              className="w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
+              className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaFacebook size={24} />
             </Link>
