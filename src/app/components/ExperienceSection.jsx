@@ -1,51 +1,62 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const ExperienceSection = () => {
-  const experiences = [
-    {
-      date: "May 2025 – Present",
-      role: "Software Developer",
-      company: "Aviationskybiz Private Limited / SKYBIZ GLOBAL, Bangalore",
-      details: [
-        "Developed Company Management System using MERN stack",
-        "Enhanced attendance with manual punch-in/out limits and leave tracking",
-        "Implemented shift management and fixed timescale issues",
-        "Improved both backend (Node/Express/MongoDB) and frontend (React/Tailwind CSS)",
-      ],
-    },
-    {
-      date: "Aug 2024 – Feb 2025",
-      role: "Python Developer",
-      company: "X-Ceincia Tech Ind Put Ltd, Bangalore",
-      details: [
-        "Built an online job portal with email notifications and job applications",
-        "Fixed issues in Skills and Hiring Industry fields",
-        "Improved employer dashboards and admin management",
-        "Developed RBAC system using Django and React with JWT authentication",
-      ],
-    },
-    {
-      date: "Aug 2023 – Sep 2023",
-      role: "Intern",
-      company: "Varcon Technologies, Bangalore",
-      details: [
-        "Worked on E-Commerce Fashion Store Site template",
-        "Designed functional web pages and database systems",
-        "Implemented design briefs and client specifications",
-      ],
-    },
-    {
-      date: "Oct 2014 – Oct 2017",
-      role: "Apprenticeship - Turner Trade",
-      company: "Bosch Vocational Centre, Bangalore",
-      details: [
-        "Completed apprenticeship training in Turner Trade at Bosch Vocational Centre",
-        "Worked in plant operations, gaining hands-on industry exposure",
-        "Secured 73.45% marks in All India Apprenticeship Exam",
-      ],
-    },
-  ];
+  const [experiences, setExperiences] = useState([]);
+
+  useEffect(() => {
+    // Load experiences from localStorage or use default
+    const savedExperiences = localStorage.getItem("portfolioExperiences");
+    if (savedExperiences) {
+      setExperiences(JSON.parse(savedExperiences));
+    } else {
+      // Use the default experiences
+      setExperiences([
+        {
+          date: "May 2025 – Present",
+          role: "Software Developer",
+          company: "Aviationskybiz Private Limited / SKYBIZ GLOBAL, Bangalore",
+          details: [
+            "Developed Company Management System using MERN stack",
+            "Enhanced attendance with manual punch-in/out limits and leave tracking",
+            "Implemented shift management and fixed timescale issues",
+            "Improved both backend (Node/Express/MongoDB) and frontend (React/Tailwind CSS)",
+          ],
+        },
+        {
+          date: "Aug 2024 – Feb 2025",
+          role: "Python Developer",
+          company: "X-Ceincia Tech Ind Put Ltd, Bangalore",
+          details: [
+            "Built an online job portal with email notifications and job applications",
+            "Fixed issues in Skills and Hiring Industry fields",
+            "Improved employer dashboards and admin management",
+            "Developed RBAC system using Django and React with JWT authentication",
+          ],
+        },
+        {
+          date: "Aug 2023 – Sep 2023",
+          role: "Intern",
+          company: "Varcon Technologies, Bangalore",
+          details: [
+            "Worked on E-Commerce Fashion Store Site template",
+            "Designed functional web pages and database systems",
+            "Implemented design briefs and client specifications",
+          ],
+        },
+        {
+          date: "Oct 2014 – Oct 2017",
+          role: "Apprenticeship - Turner Trade",
+          company: "Bosch Vocational Centre, Bangalore",
+          details: [
+            "Completed apprenticeship training in Turner Trade at Bosch Vocational Centre",
+            "Worked in plant operations, gaining hands-on industry exposure",
+            "Secured 73.45% marks in All India Apprenticeship Exam",
+          ],
+        },
+      ]);
+    }
+  }, []);
 
   return (
     <section id="experience" className="py-16 px-4 sm:px-8 lg:px-16 bg-black">
