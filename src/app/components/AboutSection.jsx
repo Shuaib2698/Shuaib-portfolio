@@ -1,44 +1,66 @@
 "use client";
-import React, { useTransition, useState } from "react";
+import React, { useTransition, useState, useEffect } from "react";
 import Image from "next/image";
 import TabButton from "./TabButton";
 
-const TAB_DATA = [
-  {
-    title: "Education",
-    id: "education",
-    content: (
-      <ul className="list-disc pl-4">
-        <li>
-          R N S Institute of Technology — B.E. in Computer Science & Engineering
-          (2021 – 2024) | CGPA: 7.20
-        </li>
-        <br></br>
-        <li>
-          M S Polytechnic — Diploma in Computer Science <br></br>
-          (2018 – 2021) | Percentage: 80.4%
-        </li>
-      </ul>
-    ),
-  },
-  {
-    title: "Certifications",
-    id: "certifications",
-    content: (
-      <p >MySQL.</p>
-    ),
-  },
-];
-
 const AboutSection = () => {
   const [tab, setTab] = useState("education");
+  const [aboutData, setAboutData] = useState({
+    description: "",
+    education: [],
+    certifications: []
+  });
   const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    const savedAbout = localStorage.getItem("portfolioAbout");
+    if (savedAbout) {
+      setAboutData(JSON.parse(savedAbout));
+    } else {
+      setAboutData({
+        description: "Hi, I'm Shuaib, a full-stack developer from Bangalore with a background in Computer Science Engineering. Over the past 8 months, I've worked as a Python Developer and gained 4 months of experience with the MERN stack. I enjoy building end-to-end applications and have created projects like a company management system using Next.js, as well as a job portal and a social media platform. My passion lies in crafting efficient, user-friendly solutions, and my long-term goal is to establish my own startup to bring innovative ideas to life.",
+        education: [
+          "R N S Institute of Technology — B.E. in Computer Science & Engineering (2021 – 2024) | CGPA: 7.20",
+          "M S Polytechnic — Diploma in Computer Science (2018 – 2021) | Percentage: 80.4%"
+        ],
+        certifications: ["MySQL"]
+      });
+    }
+  }, []);
 
   const handleTabChange = (id) => {
     startTransition(() => {
       setTab(id);
     });
   };
+
+  const TAB_DATA = [
+    {
+      title: "Education",
+      id: "education",
+      content: (
+        <ul className="list-disc pl-4">
+          {aboutData.education?.map((edu, index) => (
+            <li key={index}>
+              {edu}
+              {index < aboutData.education.length - 1 && <br />}
+            </li>
+          ))}
+        </ul>
+      ),
+    },
+    {
+      title: "Certifications",
+      id: "certifications",
+      content: (
+        <ul className="list-disc pl-4">
+          {aboutData.certifications?.map((cert, index) => (
+            <li key={index}>{cert}</li>
+          ))}
+        </ul>
+      ),
+    },
+  ];
 
   return (
     <section className="text-white" id="about">
@@ -47,7 +69,7 @@ const AboutSection = () => {
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-3xl font-bold text-white mb-4">About Me</h2>
           <p className="text-sm lg:text-base">
-            Hi, I’m Shuaib, a full-stack developer from Bangalore with a background in Computer Science Engineering. Over the past 8 months, I’ve worked as a Python Developer and gained 4 months of experience with the MERN stack. I enjoy building end-to-end applications and have created projects like a company management system using Next.js, as well as a job portal and a social media platform. My passion lies in crafting efficient, user-friendly solutions, and my long-term goal is to establish my own startup to bring innovative ideas to life.
+            {aboutData.description}
           </p>
           <div className="flex flex-row justify-start mt-8">
             {TAB_DATA.map((tabBtn) => (
@@ -60,7 +82,7 @@ const AboutSection = () => {
               </TabButton>
             ))}
           </div>
-          <div className="mt-8">{TAB_DATA.find((t) => t.id === tab).content}</div>
+          <div className="mt-8">{TAB_DATA.find((t) => t.id === tab)?.content}</div>
         </div>
       </div>
     </section>

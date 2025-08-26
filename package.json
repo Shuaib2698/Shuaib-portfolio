@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@react-email/components": "^0.5.1",
+    "@react-email/render": "^1.2.1",
     "@tailwindcss/postcss": "^4.1.11",
     "autoprefixer": "10.4.15",
     "eslint": "8.47.0",

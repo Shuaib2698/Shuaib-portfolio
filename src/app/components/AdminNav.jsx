@@ -1,10 +1,11 @@
 const AdminNav = ({ activeTab, setActiveTab }) => {
   const tabs = [
+    { id: "hero", name: "Hero Section" },
+    { id: "about", name: "About" },
     { id: "experience", name: "Experience" },
     { id: "projects", name: "Projects" },
     { id: "skills", name: "Skills" },
-    { id: "about", name: "About" },
-    { id: "hero", name: "Hero Section" },
+    { id: "email", name: "Email Section" },
   ];
 
   return (

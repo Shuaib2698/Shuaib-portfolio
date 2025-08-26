@@ -5,48 +5,46 @@ import "react-circular-progressbar/dist/styles.css";
 
 const SkillSection = () => {
   const [animated, setAnimated] = useState(false);
+  const [skillsData, setSkillsData] = useState({
+    technicalSkills: {},
+    professionalSkills: [],
+    softSkills: []
+  });
 
   useEffect(() => {
     setAnimated(true);
+    
+    const savedSkills = localStorage.getItem("portfolioSkills");
+    if (savedSkills) {
+      setSkillsData(JSON.parse(savedSkills));
+    } else {
+      setSkillsData({
+        technicalSkills: {
+          Languages: ["Python", "Java", "JavaScript", "TypeScript", "C", "C++"],
+          "Web Development": [
+            "HTML5", "CSS3", "React.js", "Next.js", "Node.js", "Express.js", 
+            "Tailwind CSS", "Bootstrap"
+          ],
+          Databases: ["MySQL", "PostgreSQL", "MongoDB"],
+          "Tools & Libraries": [
+            "Git", "GitHub", "VS Code", "Postman", "pandas", "NumPy", "Matplotlib"
+          ]
+        },
+        professionalSkills: [
+          { name: "Full Stack Python Development", level: 80 },
+          { name: "MERN Stack", level: 85 },
+          { name: "Frontend Development", level: 70 },
+          { name: "Backend Development", level: 85 }
+        ],
+        softSkills: [
+          { name: "Problem Solving", level: 90 },
+          { name: "Teamwork", level: 85 },
+          { name: "Communication", level: 80 },
+          { name: "Creativity", level: 95 }
+        ]
+      });
+    }
   }, []);
-
-  const technicalSkills = {
-    Languages: ["Python", "Java", "JavaScript", "TypeScript", "C", "C++"],
-    "Web Development": [
-      "HTML5",
-      "CSS3",
-      "React.js",
-      "Next.js",
-      "Node.js",
-      "Express.js",
-      "Tailwind CSS",
-      "Bootstrap",
-    ],
-    Databases: ["MySQL", "PostgreSQL", "MongoDB"],
-    "Tools & Libraries": [
-      "Git",
-      "GitHub",
-      "VS Code",
-      "Postman",
-      "pandas",
-      "NumPy",
-      "Matplotlib",
-    ],
-  };
-
-  const professionalSkills = [
-    { name: "Full Stack Python Development", level: 80 },
-    { name: "MERN Stack", level: 85 },
-    { name: "Frontend Development", level: 70 },
-    { name: "Backend Development", level: 85 },
-  ];
-
-  const softSkills = [
-    { name: "Problem Solving", level: 90 },
-    { name: "Teamwork", level: 85 },
-    { name: "Communication", level: 80 },
-    { name: "Creativity", level: 95 },
-  ];
 
   return (
     <section id="skills" className="section py-16 px-4 sm:px-8 lg:px-16">
@@ -62,7 +60,7 @@ const SkillSection = () => {
           </h3>
 
           <div className="space-y-6">
-            {Object.entries(technicalSkills).map(([category, skills]) => (
+            {Object.entries(skillsData.technicalSkills || {}).map(([category, skills]) => (
               <div key={category}>
                 <h4 className="text-xl font-semibold mb-3 text-white">
                   {category}
@@ -89,16 +87,14 @@ const SkillSection = () => {
           </h3>
 
           <div className="grid grid-cols-2 gap-6">
-            {professionalSkills.map((skill, index) => (
+            {skillsData.professionalSkills?.map((skill, index) => (
               <div key={index} className="flex flex-col items-center">
                 <div className="w-24 h-24 mb-3">
                   <CircularProgressbar
                     value={animated ? skill.level : 0}
                     text={`${skill.level}%`}
                     styles={buildStyles({
-                      pathColor: `rgba(var(--primary-color), ${
-                        skill.level / 100
-                      })`,
+                      pathColor: `rgba(var(--primary-color), ${skill.level / 100})`,
                       textColor: "rgb(var(--primary-color))",
                       trailColor: "rgba(var(--primary-color), 0.1)",
                       textSize: "16px",
@@ -121,7 +117,7 @@ const SkillSection = () => {
           </h3>
 
           <div className="space-y-4">
-            {softSkills.map((skill, index) => (
+            {skillsData.softSkills?.map((skill, index) => (
               <div key={index} className="mb-3">
                 <div className="flex justify-between mb-1">
                   <span className="text-white text-sm font-medium">
