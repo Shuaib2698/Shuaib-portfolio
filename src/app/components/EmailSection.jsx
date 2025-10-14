@@ -37,11 +37,11 @@ const EmailSection = () => {
       setEmailData(JSON.parse(savedEmail));
     } else {
       setEmailData({
-        title: "Let&apos;s Connect",
-        description: "I&apos;m currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!",
+        title: "Lets Connect",
+        description: "Im currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I will try my best to get back to you!",
         emailPlaceholder: "jacob@google.com",
         subjectPlaceholder: "Just saying hi",
-        messagePlaceholder: "Let&apos;s talk about..."
+        messagePlaceholder: "Lets talk about..."
       });
     }
   }, []);
@@ -89,7 +89,7 @@ const handleSubmit = async (e) => {
       <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-900/30 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
       <div className="z-10 section-box">
         <h5 className="text-xl font-bold text-white my-2">
-          {emailData.title || "Let&apos;s Connect"}
+          {emailData.title || "Lets Connect"}
         </h5>
         <p className="text-[#ADB7BE] mb-4 max-w-md">
           {emailData.description || "I&apos;m currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!"}
