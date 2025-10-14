@@ -37,11 +37,11 @@ const EmailSection = () => {
       setEmailData(JSON.parse(savedEmail));
     } else {
       setEmailData({
-        title: "Let's Connect",
-        description: "I'm currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you!",
+        title: "Let&apos;s Connect",
+        description: "I&apos;m currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!",
         emailPlaceholder: "jacob@google.com",
         subjectPlaceholder: "Just saying hi",
-        messagePlaceholder: "Let's talk about..."
+        messagePlaceholder: "Let&apos;s talk about..."
       });
     }
   }, []);
@@ -87,10 +87,10 @@ const EmailSection = () => {
       <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-900/30 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
       <div className="z-10 section-box">
         <h5 className="text-xl font-bold text-white my-2">
-          {emailData.title || "Let's Connect"}
+          {emailData.title || "Let&apos;s Connect"}
         </h5>
         <p className="text-[#ADB7BE] mb-4 max-w-md">
-          {emailData.description || "I'm currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I'll try my best to get back to you!"}
+          {emailData.description || "I&apos;m currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I&apos;ll try my best to get back to you!"}
         </p>
         <div className="socials flex flex-row gap-4">
           <Link 
@@ -127,7 +127,7 @@ const EmailSection = () => {
         {emailSubmitted ? (
           <div className="bg-green-900/20 border border-green-500 rounded-lg p-4">
             <p className="text-green-500 text-center">
-              Email sent successfully! I'll get back to you soon.
+              Email sent successfully! I&apos;ll get back to you soon.
             </p>
           </div>
         ) : (
@@ -177,7 +177,7 @@ const EmailSection = () => {
                 rows="4"
                 required
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:border-[rgb(var(--primary-color))] focus:ring-[rgb(var(--primary-color))] focus:outline-none transition-colors"
-                placeholder={emailData.messagePlaceholder || "Let's talk about..."}
+                placeholder={emailData.messagePlaceholder || "Let&apos;s talk about..."}
               />
             </div>
             <button
