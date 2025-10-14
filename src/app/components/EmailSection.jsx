@@ -41,7 +41,7 @@ const EmailSection = () => {
         description: "Im currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I will try my best to get back to you!",
         emailPlaceholder: "jacob@google.com",
         subjectPlaceholder: "Just saying hi",
-        messagePlaceholder: "Lets talk about..."
+        messagePlaceholder: "Lets talk about...."
       });
     }
   }, []);
