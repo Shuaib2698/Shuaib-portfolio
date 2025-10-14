@@ -1,3 +1,4 @@
+// middleware.js
 import { NextResponse } from 'next/server'
 
 export function middleware(request) {
@@ -5,7 +6,8 @@ export function middleware(request) {
   
   // Protect admin routes
   if (pathname.startsWith('/admin/dashboard')) {
-    const auth = request.cookies.get('adminAuth')
+    const auth = request.cookies.get('adminAuth') || 
+                 (request.headers.get('authorization') === 'Bearer true');
     
     if (!auth || auth.value !== 'true') {
       return NextResponse.redirect(new URL('/admin', request.url))
