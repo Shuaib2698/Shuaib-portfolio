@@ -84,7 +84,7 @@ const EmailSection = () => {
       id="contact"
       className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-8 relative"
     >
-      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/30 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
+      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-900/30 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
       <div className="z-10 section-box">
         <h5 className="text-xl font-bold text-white my-2">
           {emailData.title || "Let's Connect"}
@@ -96,28 +96,28 @@ const EmailSection = () => {
           <Link 
             href={heroData.socialLinks?.github || "https://github.com/Shuaib2698"} 
             target="_blank"
-            className="w-12 h-12 rounded-full border-2 border-purple-700 flex items-center justify-center text-purple-700 hover:bg-purple-700 hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(126,34,206,0.6)]"
+            className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
           >
             <FaGithub size={24} />
           </Link>
           <Link 
             href={heroData.socialLinks?.linkedin || "https://www.linkedin.com/in/shaik-shuaib-ahmed-b01459128"} 
             target="_blank"
-            className="w-12 h-12 rounded-full border-2 border-purple-700 flex items-center justify-center text-purple-700 hover:bg-purple-700 hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(126,34,206,0.6)]"
+            className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
           >
             <FaLinkedin size={24} />
           </Link>
           <Link 
             href={heroData.socialLinks?.instagram || "https://www.instagram.com/shuaib9845"} 
             target="_blank"
-            className="w-12 h-12 rounded-full border-2 border-purple-700 flex items-center justify-center text-purple-700 hover:bg-purple-700 hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(126,34,206,0.6)]"
+            className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
           >
             <FaInstagram size={24} />
           </Link>
           <Link 
             href={heroData.socialLinks?.facebook || "https://www.facebook.com/profile.php?id=100007007058045"} 
             target="_blank"
-            className="w-12 h-12 rounded-full border-2 border-purple-700 flex items-center justify-center text-purple-700 hover:bg-purple-700 hover:text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(126,34,206,0.6)]"
+            className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
           >
             <FaFacebook size={24} />
           </Link>
@@ -144,7 +144,7 @@ const EmailSection = () => {
                 type="email"
                 id="email"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:border-purple-700 focus:ring-purple-700 focus:outline-none transition-colors"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:border-[rgb(var(--primary-color))] focus:ring-[rgb(var(--primary-color))] focus:outline-none transition-colors"
                 placeholder={emailData.emailPlaceholder || "jacob@google.com"}
               />
             </div>
@@ -160,7 +160,7 @@ const EmailSection = () => {
                 type="text"
                 id="subject"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:border-purple-700 focus:ring-purple-700 focus:outline-none transition-colors"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:border-[rgb(var(--primary-color))] focus:ring-[rgb(var(--primary-color))] focus:outline-none transition-colors"
                 placeholder={emailData.subjectPlaceholder || "Just saying hi"}
               />
             </div>
@@ -176,13 +176,13 @@ const EmailSection = () => {
                 id="message"
                 rows="4"
                 required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:border-purple-700 focus:ring-purple-700 focus:outline-none transition-colors"
+                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:border-[rgb(var(--primary-color))] focus:ring-[rgb(var(--primary-color))] focus:outline-none transition-colors"
                 placeholder={emailData.messagePlaceholder || "Let's talk about..."}
               />
             </div>
             <button
               type="submit"
-              className="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2.5 px-5 rounded-lg w-full transition-all duration-300 hover:shadow-[0_0_15px_rgba(126,34,206,0.6)]"
+              className="btn-hover-animation bg-[rgb(var(--primary-color))] hover:bg-[rgba(var(--primary-color),0.8)] text-black font-bold py-2.5 px-5 rounded-lg w-full transition-all duration-300"
             >
               Send Message
             </button>

@@ -23,7 +23,18 @@ const AboutSection = () => {
           "R N S Institute of Technology — B.E. in Computer Science & Engineering (2021 – 2024) | CGPA: 7.20",
           "M S Polytechnic — Diploma in Computer Science (2018 – 2021) | Percentage: 80.4%"
         ],
-        certifications: ["MySQL"]
+        certifications: [
+          "Full Stack Web Development",
+          "Python Fundamentals",
+          "Python by Example", 
+          "C++ Programming",
+          "Frontend Development - CSS",
+          "Frontend Development - HTML",
+          "PHP Programming",
+          "Data Structures in C",
+          "Java Programming",
+          "MySQL"
+        ]
       });
     }
   }, []);
@@ -32,6 +43,19 @@ const AboutSection = () => {
     startTransition(() => {
       setTab(id);
     });
+  };
+
+  const certificationLinks = {
+    "Full Stack Web Development": "https://drive.google.com/file/d/1aWLYRXzNgrH94wS34CgPYfgdWgnuwYjx/view?usp=drive_link",
+    "Python Fundamentals": "https://drive.google.com/file/d/1tb0aE8rRMRel9Y5WbBQJMSd2G60yreYx/view?usp=drive_link",
+    "Python by Example": "https://drive.google.com/file/d/1yQH_HocdddbJhZ0A-VmunttoYVBY-VhG/view?usp=drive_link",
+    "C++ Programming": "https://www.mygreatlearning.com/certificate/FUBOFIHO?referrer_code=GLAMTO6GGNO_W",
+    "Frontend Development - CSS": "https://www.mygreatlearning.com/certificate/GKITKJGR?referrer_code=GLAMTO6GGNO_W",
+    "Frontend Development - HTML": "https://www.mygreatlearning.com/certificate/IIOLGHVN?referrer_code=GLAMTO6GGNO_W",
+    "PHP Programming": "https://www.mygreatlearning.com/certificate/CTNYRIEP?referrer_code=GLAMTO6GGNO_W",
+    "Data Structures in C": "https://www.mygreatlearning.com/certificate/ZLBYPRKS?referrer_code=GLAMTO6GGNO_W",
+    "Java Programming": "https://www.mygreatlearning.com/certificate/KJGPANTY?referrer_code=GLAMTO6GGNO_W",
+    "MySQL": "https://www.hackerrank.com/certificates/86328d90018e"
   };
 
   const TAB_DATA = [
@@ -53,9 +77,22 @@ const AboutSection = () => {
       title: "Certifications",
       id: "certifications",
       content: (
-        <ul className="list-disc pl-4">
+        <ul className="list-disc pl-4 space-y-2">
           {aboutData.certifications?.map((cert, index) => (
-            <li key={index}>{cert}</li>
+            <li key={index}>
+              {certificationLinks[cert] ? (
+                <a 
+                  href={certificationLinks[cert]}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-[rgb(var(--primary-color))] hover:underline transition-all duration-300 hover:text-[rgba(var(--primary-color),0.8)]"
+                >
+                  {cert}
+                </a>
+              ) : (
+                cert
+              )}
+            </li>
           ))}
         </ul>
       ),
