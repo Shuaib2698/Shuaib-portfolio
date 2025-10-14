@@ -46,38 +46,40 @@ const EmailSection = () => {
     }
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = {
-      email: e.target.email.value,
-      subject: e.target.subject.value,
-      message: e.target.message.value,
-    };
-
-    if (!data.email || !data.subject || !data.message) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        setEmailSubmitted(true);
-        // Reset form
-        e.target.reset();
-      } else {
-        alert("Failed to send message. Try again.");
-      }
-    } catch (error) {
-      console.error("Error sending message:", error);
-      alert("An error occurred while sending the message.");
-    }
+  // In your handleSubmit function in EmailSection.jsx, update it to:
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const data = {
+    email: e.target.email.value,
+    subject: e.target.subject.value,
+    message: e.target.message.value,
   };
+
+  if (!data.email || !data.subject || !data.message) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.success) {
+      setEmailSubmitted(true);
+      e.target.reset();
+    } else {
+      alert(result.error || "Failed to send message. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error sending message:", error);
+    alert("An error occurred while sending the message. Please try again.");
+  }
+};
 
   return (
     <section
@@ -177,7 +179,7 @@ const EmailSection = () => {
                 rows="4"
                 required
                 className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5 focus:border-[rgb(var(--primary-color))] focus:ring-[rgb(var(--primary-color))] focus:outline-none transition-colors"
-                placeholder={emailData.messagePlaceholder || "Let&apos;s talk about..."}
+                placeholder={emailData.messagePlaceholder || "Lets talk about..."}
               />
             </div>
             <button
