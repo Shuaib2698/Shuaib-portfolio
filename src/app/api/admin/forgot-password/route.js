@@ -7,6 +7,8 @@ import { tokenStore } from "@/app/utils/tokenStore";
 const resend = new Resend(process.env.RESEND_API_KEY);
 const ADMIN_EMAIL = "298shuaib@gmail.com";
 
+export const dynamic = 'force-dynamic'; // Add this line
+
 export async function POST(request) {
   try {
     const { email } = await request.json();
@@ -18,7 +20,6 @@ export async function POST(request) {
       );
     }
 
-    // Verify email matches admin email
     if (email !== ADMIN_EMAIL) {
       return NextResponse.json(
         { error: "Email not found" },
@@ -26,20 +27,13 @@ export async function POST(request) {
       );
     }
 
-    // Generate reset token
     const token = crypto.randomBytes(32).toString("hex");
-    const expires = Date.now() + 3600000; // 1 hour
+    const expires = Date.now() + 3600000;
 
-    // Store token using shared store
     tokenStore.set(token, { email, expires });
 
-    // Create reset link
     const resetLink = `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/admin/reset-password?token=${token}`;
 
-    console.log("Generated reset token:", token); // For debugging
-    console.log("Reset link:", resetLink); // For debugging
-
-    // Send email
     const { error } = await resend.emails.send({
       from: "Portfolio Admin <onboarding@resend.dev>",
       to: [ADMIN_EMAIL],
@@ -54,9 +48,6 @@ export async function POST(request) {
           </a>
           <p style="margin-top: 20px; color: #666; font-size: 12px;">
             This link will expire in 1 hour. If you didn't request this, please ignore this email.
-          </p>
-          <p style="color: #999; font-size: 10px; margin-top: 20px;">
-            Debug: Token = ${token}
           </p>
         </div>
       `,

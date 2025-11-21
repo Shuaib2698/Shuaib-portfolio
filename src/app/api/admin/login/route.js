@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { getAdminPasswordHash } from "../reset-password/route";
 
+export const dynamic = 'force-dynamic'; // Add this line
+
 export async function POST(request) {
   try {
     const { password } = await request.json();
@@ -14,13 +16,8 @@ export async function POST(request) {
       );
     }
 
-    // Get current password hash
     const ADMIN_PASSWORD_HASH = getAdminPasswordHash();
-
-    // Verify password
     const isValid = await bcrypt.compare(password, ADMIN_PASSWORD_HASH);
-
-    console.log("Login attempt - Valid:", isValid); // Debug
 
     if (isValid) {
       const response = NextResponse.json({ 
@@ -28,12 +25,11 @@ export async function POST(request) {
         message: "Login successful" 
       });
       
-      // Set HTTP-only cookie for server-side authentication
       response.cookies.set('adminAuth', 'true', {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
-        maxAge: 60 * 60 * 24 // 24 hours
+        maxAge: 60 * 60 * 24
       });
 
       return response;

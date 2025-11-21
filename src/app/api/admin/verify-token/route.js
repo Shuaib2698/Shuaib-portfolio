@@ -2,13 +2,14 @@
 import { NextResponse } from "next/server";
 import { tokenStore } from "@/app/utils/tokenStore";
 
+export const dynamic = 'force-dynamic'; // Add this line
+
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const token = searchParams.get("token");
 
-    console.log("Verifying token:", token); // Debug log
-    console.log("Stored tokens:", Array.from(tokenStore.keys())); // Debug log
+    console.log("Verifying token:", token);
 
     if (!token) {
       return NextResponse.json(

@@ -3,14 +3,13 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { tokenStore } from "@/app/utils/tokenStore";
 
-// In-memory password storage (replace with database in production)
-let adminPasswordHash = "$2b$10$SHD/onD/oKYRaMZzCsTjh.jfOtRHfUrrBESjIObh1NHRcyyZT2oJG"; // Default: "admin123"
+let adminPasswordHash = "$2b$10$SHD/onD/oKYRaMZzCsTjh.jfOtRHfUrrBESjIObh1NHRcyyZT2oJG";
+
+export const dynamic = 'force-dynamic'; // Add this line
 
 export async function POST(request) {
   try {
     const { token, password } = await request.json();
-
-    console.log("Reset password request - Token:", token); // Debug
 
     if (!token || !password) {
       return NextResponse.json(
@@ -36,15 +35,9 @@ export async function POST(request) {
       );
     }
 
-    // Hash new password
     const hashedPassword = await bcrypt.hash(password, 10);
-    
-    // Update the admin password
     adminPasswordHash = hashedPassword;
     
-    console.log("Password updated successfully. New hash:", hashedPassword);
-
-    // Remove the used token
     tokenStore.delete(token);
 
     return NextResponse.json({ 
@@ -61,7 +54,6 @@ export async function POST(request) {
   }
 }
 
-// Export the current password hash for login verification
 export function getAdminPasswordHash() {
   return adminPasswordHash;
 }

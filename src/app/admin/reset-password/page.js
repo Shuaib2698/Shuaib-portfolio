@@ -1,6 +1,6 @@
 // app/admin/reset-password/page.js
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react"; // Add useCallback
 import { useRouter, useSearchParams } from "next/navigation";
 
 const ResetPassword = () => {
@@ -15,22 +15,14 @@ const ResetPassword = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
-  useEffect(() => {
-    if (token) {
-      verifyToken();
-    } else {
-      setLoading(false);
-      setError("Invalid reset link - No token provided");
-    }
-  }, [token]);
-
-  const verifyToken = async () => {
+  // Wrap verifyToken in useCallback to avoid dependency issues
+  const verifyToken = useCallback(async () => {
     try {
-      console.log("Verifying token:", token); // Debug
+      console.log("Verifying token:", token);
       const response = await fetch(`/api/admin/verify-token?token=${token}`);
       const data = await response.json();
 
-      console.log("Token verification response:", data); // Debug
+      console.log("Token verification response:", data);
 
       if (response.ok) {
         setIsValidToken(true);
@@ -44,14 +36,22 @@ const ResetPassword = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]); // Add token as dependency
+
+  useEffect(() => {
+    if (token) {
+      verifyToken();
+    } else {
+      setLoading(false);
+      setError("Invalid reset link - No token provided");
+    }
+  }, [token, verifyToken]); // Add verifyToken to dependencies
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setError("");
     setMessage("");
 
-    // Enhanced validation
     if (password.length < 6) {
       setError("Password must be at least 6 characters long");
       return;
@@ -62,7 +62,6 @@ const ResetPassword = () => {
       return;
     }
 
-    // Additional security checks
     if (password === 'password' || password === 'admin' || password === '123456') {
       setError("Password is too common. Please choose a stronger password.");
       return;

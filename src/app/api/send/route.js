@@ -4,15 +4,14 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Use your domain email or get a domain from Resend
 const TO_EMAIL = "298shuaib@gmail.com";
-const FROM_EMAIL = "portfolio@yourdomain.com"; // You need to verify this domain in Resend
+
+export const dynamic = 'force-dynamic'; // Add this line
 
 export async function POST(req) {
   try {
     const { email, subject, message } = await req.json();
 
-    // Validate required fields
     if (!email || !subject || !message) {
       return NextResponse.json(
         { success: false, error: "All fields are required" },
@@ -20,7 +19,6 @@ export async function POST(req) {
       );
     }
 
-    // Enhanced HTML email template
     const htmlContent = `
       <!DOCTYPE html>
       <html>
@@ -56,7 +54,7 @@ export async function POST(req) {
     `;
 
     const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact <portfolio@resend.dev>", // Use Resend's test domain
+      from: "Portfolio Contact <portfolio@resend.dev>",
       to: TO_EMAIL,
       reply_to: email,
       subject: `Portfolio Contact: ${subject}`,
