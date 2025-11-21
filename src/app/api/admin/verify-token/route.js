@@ -1,12 +1,14 @@
 // app/api/admin/verify-token/route.js
 import { NextResponse } from "next/server";
-
-const resetTokens = new Map();
+import { tokenStore } from "@/app/utils/tokenStore";
 
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const token = searchParams.get("token");
+
+    console.log("Verifying token:", token); // Debug log
+    console.log("Stored tokens:", Array.from(tokenStore.keys())); // Debug log
 
     if (!token) {
       return NextResponse.json(
@@ -15,7 +17,7 @@ export async function GET(request) {
       );
     }
 
-    const tokenData = resetTokens.get(token);
+    const tokenData = tokenStore.get(token);
 
     if (!tokenData) {
       return NextResponse.json(
@@ -25,14 +27,17 @@ export async function GET(request) {
     }
 
     if (Date.now() > tokenData.expires) {
-      resetTokens.delete(token);
+      tokenStore.delete(token);
       return NextResponse.json(
         { error: "Token has expired" },
         { status: 400 }
       );
     }
 
-    return NextResponse.json({ valid: true });
+    return NextResponse.json({ 
+      valid: true,
+      email: tokenData.email 
+    });
 
   } catch (error) {
     console.error("Verify token error:", error);

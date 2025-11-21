@@ -2,12 +2,10 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import crypto from "crypto";
+import { tokenStore } from "@/app/utils/tokenStore";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const ADMIN_EMAIL = "298shuaib@gmail.com";
-
-// In-memory store for reset tokens (use database in production)
-const resetTokens = new Map();
 
 export async function POST(request) {
   try {
@@ -32,11 +30,14 @@ export async function POST(request) {
     const token = crypto.randomBytes(32).toString("hex");
     const expires = Date.now() + 3600000; // 1 hour
 
-    // Store token
-    resetTokens.set(token, { email, expires });
+    // Store token using shared store
+    tokenStore.set(token, { email, expires });
 
     // Create reset link
     const resetLink = `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/admin/reset-password?token=${token}`;
+
+    console.log("Generated reset token:", token); // For debugging
+    console.log("Reset link:", resetLink); // For debugging
 
     // Send email
     const { error } = await resend.emails.send({
@@ -53,6 +54,9 @@ export async function POST(request) {
           </a>
           <p style="margin-top: 20px; color: #666; font-size: 12px;">
             This link will expire in 1 hour. If you didn't request this, please ignore this email.
+          </p>
+          <p style="color: #999; font-size: 10px; margin-top: 20px;">
+            Debug: Token = ${token}
           </p>
         </div>
       `,

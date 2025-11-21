@@ -6,10 +6,14 @@ export function middleware(request) {
   
   // Protect admin routes
   if (pathname.startsWith('/admin/dashboard')) {
-    const auth = request.cookies.get('adminAuth') || 
-                 (request.headers.get('authorization') === 'Bearer true');
+    // Check for cookie authentication
+    const authCookie = request.cookies.get('adminAuth');
     
-    if (!auth || auth.value !== 'true') {
+    // Check for localStorage via headers (for client-side)
+    const authHeader = request.headers.get('authorization');
+    
+    if ((!authCookie || authCookie.value !== 'true') && 
+        (!authHeader || authHeader !== 'Bearer true')) {
       return NextResponse.redirect(new URL('/admin', request.url))
     }
   }

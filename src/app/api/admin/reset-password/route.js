@@ -1,12 +1,16 @@
 // app/api/admin/reset-password/route.js
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { tokenStore } from "@/app/utils/tokenStore";
 
-const resetTokens = new Map();
+// In-memory password storage (replace with database in production)
+let adminPasswordHash = "$2b$10$SHD/onD/oKYRaMZzCsTjh.jfOtRHfUrrBESjIObh1NHRcyyZT2oJG"; // Default: "admin123"
 
 export async function POST(request) {
   try {
     const { token, password } = await request.json();
+
+    console.log("Reset password request - Token:", token); // Debug
 
     if (!token || !password) {
       return NextResponse.json(
@@ -15,7 +19,7 @@ export async function POST(request) {
       );
     }
 
-    const tokenData = resetTokens.get(token);
+    const tokenData = tokenStore.get(token);
 
     if (!tokenData) {
       return NextResponse.json(
@@ -25,7 +29,7 @@ export async function POST(request) {
     }
 
     if (Date.now() > tokenData.expires) {
-      resetTokens.delete(token);
+      tokenStore.delete(token);
       return NextResponse.json(
         { error: "Token has expired" },
         { status: 400 }
@@ -34,13 +38,14 @@ export async function POST(request) {
 
     // Hash new password
     const hashedPassword = await bcrypt.hash(password, 10);
+    
+    // Update the admin password
+    adminPasswordHash = hashedPassword;
+    
+    console.log("Password updated successfully. New hash:", hashedPassword);
 
-    // In production, update the password in your database
-    // For now, we'll just remove the token
-    resetTokens.delete(token);
-
-    // TODO: Update the actual admin password in your storage
-    console.log("New password hash:", hashedPassword);
+    // Remove the used token
+    tokenStore.delete(token);
 
     return NextResponse.json({ 
       success: true, 
@@ -54,4 +59,9 @@ export async function POST(request) {
       { status: 500 }
     );
   }
+}
+
+// Export the current password hash for login verification
+export function getAdminPasswordHash() {
+  return adminPasswordHash;
 }

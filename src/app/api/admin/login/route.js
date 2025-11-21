@@ -1,10 +1,7 @@
 // app/api/admin/login/route.js
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-
-// Store admin credentials (in production, use a database)
-const ADMIN_EMAIL = "298shuaib@gmail.com";
-const ADMIN_PASSWORD_HASH = "$2b$10$SHD/onD/oKYRaMZzCsTjh.jfOtRHfUrrBESjIObh1NHRcyyZT2oJG"; // hash for "admin123"
+import { getAdminPasswordHash } from "../reset-password/route";
 
 export async function POST(request) {
   try {
@@ -17,11 +14,29 @@ export async function POST(request) {
       );
     }
 
+    // Get current password hash
+    const ADMIN_PASSWORD_HASH = getAdminPasswordHash();
+
     // Verify password
     const isValid = await bcrypt.compare(password, ADMIN_PASSWORD_HASH);
 
+    console.log("Login attempt - Valid:", isValid); // Debug
+
     if (isValid) {
-      return NextResponse.json({ success: true });
+      const response = NextResponse.json({ 
+        success: true,
+        message: "Login successful" 
+      });
+      
+      // Set HTTP-only cookie for server-side authentication
+      response.cookies.set('adminAuth', 'true', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 60 * 60 * 24 // 24 hours
+      });
+
+      return response;
     } else {
       return NextResponse.json(
         { error: "Invalid password" },

@@ -9,12 +9,14 @@ const AdminLogin = () => {
   const [error, setError] = useState("");
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setMessage("");
+    setLoading(true);
 
     try {
       const response = await fetch("/api/admin/login", {
@@ -28,13 +30,20 @@ const AdminLogin = () => {
       const data = await response.json();
 
       if (response.ok) {
+        // Set both localStorage and cookie for consistency
         localStorage.setItem("adminAuth", "true");
-        router.push("/admin/dashboard");
+        setMessage("Login successful! Redirecting...");
+        
+        setTimeout(() => {
+          router.push("/admin/dashboard");
+        }, 1000);
       } else {
         setError(data.error || "Invalid password");
       }
     } catch (error) {
       setError("Login failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,9 +51,11 @@ const AdminLogin = () => {
     e.preventDefault();
     setError("");
     setMessage("");
+    setLoading(true);
 
     if (!email) {
       setError("Please enter your email");
+      setLoading(false);
       return;
     }
 
@@ -60,7 +71,7 @@ const AdminLogin = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessage("Password reset link sent to your email!");
+        setMessage("Password reset link sent to your email! Check your inbox.");
         setIsForgotPassword(false);
         setEmail("");
       } else {
@@ -68,6 +79,8 @@ const AdminLogin = () => {
       }
     } catch (error) {
       setError("Failed to process request. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -88,20 +101,23 @@ const AdminLogin = () => {
                 placeholder="Enter admin password"
                 className="w-full px-4 py-2 bg-[#111] border border-[#333] rounded-md text-white focus:outline-none focus:border-[rgb(var(--primary-color))]"
                 required
+                disabled={loading}
               />
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
             {message && <p className="text-green-500 text-sm">{message}</p>}
             <button
               type="submit"
-              className="w-full btn-cyan btn-hover-animation py-2 rounded-md"
+              className="w-full btn-cyan btn-hover-animation py-2 rounded-md disabled:opacity-50"
+              disabled={loading}
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
             <button
               type="button"
               onClick={() => setIsForgotPassword(true)}
               className="w-full text-[rgb(var(--primary-color))] hover:underline text-sm"
+              disabled={loading}
             >
               Forgot Password?
             </button>
@@ -116,20 +132,26 @@ const AdminLogin = () => {
                 placeholder="Enter your admin email"
                 className="w-full px-4 py-2 bg-[#111] border border-[#333] rounded-md text-white focus:outline-none focus:border-[rgb(var(--primary-color))]"
                 required
+                disabled={loading}
               />
+              <p className="text-xs text-gray-400 mt-2">
+                Only 298shuaib@gmail.com is registered
+              </p>
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
             {message && <p className="text-green-500 text-sm">{message}</p>}
             <button
               type="submit"
-              className="w-full btn-cyan btn-hover-animation py-2 rounded-md"
+              className="w-full btn-cyan btn-hover-animation py-2 rounded-md disabled:opacity-50"
+              disabled={loading}
             >
-              Send Reset Link
+              {loading ? "Sending..." : "Send Reset Link"}
             </button>
             <button
               type="button"
               onClick={() => setIsForgotPassword(false)}
               className="w-full text-[rgb(var(--primary-color))] hover:underline text-sm"
+              disabled={loading}
             >
               Back to Login
             </button>
