@@ -2,12 +2,12 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import crypto from "crypto";
-import { tokenStore } from "@/app/utils/tokenStore";
+import { tokenStore } from "@/app/utils/dataStorage";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const ADMIN_EMAIL = "298shuaib@gmail.com";
 
-export const dynamic = 'force-dynamic'; // Add this line
+export const dynamic = 'force-dynamic';
 
 export async function POST(request) {
   try {
@@ -49,6 +49,9 @@ export async function POST(request) {
           <p style="margin-top: 20px; color: #666; font-size: 12px;">
             This link will expire in 1 hour. If you didn't request this, please ignore this email.
           </p>
+          <p style="color: #999; font-size: 11px; margin-top: 20px;">
+            If the button doesn't work, copy and paste this link: ${resetLink}
+          </p>
         </div>
       `,
     });
@@ -60,6 +63,9 @@ export async function POST(request) {
         { status: 500 }
       );
     }
+
+    console.log('📧 Reset password email sent to:', ADMIN_EMAIL);
+    console.log('Reset link:', resetLink);
 
     return NextResponse.json({ 
       success: true, 

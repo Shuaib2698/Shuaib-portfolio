@@ -1,11 +1,9 @@
 // app/api/admin/reset-password/route.js
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { tokenStore } from "@/app/utils/tokenStore";
+import { tokenStore, passwordStore } from "@/app/utils/dataStorage";
 
-let adminPasswordHash = "$2b$10$SHD/onD/oKYRaMZzCsTjh.jfOtRHfUrrBESjIObh1NHRcyyZT2oJG";
-
-export const dynamic = 'force-dynamic'; // Add this line
+export const dynamic = 'force-dynamic';
 
 export async function POST(request) {
   try {
@@ -36,7 +34,9 @@ export async function POST(request) {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    adminPasswordHash = hashedPassword;
+    
+    // Use the shared password store (persistent)
+    passwordStore.set(hashedPassword);
     
     tokenStore.delete(token);
 
@@ -52,8 +52,4 @@ export async function POST(request) {
       { status: 500 }
     );
   }
-}
-
-export function getAdminPasswordHash() {
-  return adminPasswordHash;
 }

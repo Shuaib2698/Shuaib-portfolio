@@ -1,9 +1,9 @@
 // app/api/admin/login/route.js
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { getAdminPasswordHash } from "../reset-password/route";
+import { passwordStore } from "@/app/utils/dataStorage";
 
-export const dynamic = 'force-dynamic'; // Add this line
+export const dynamic = 'force-dynamic';
 
 export async function POST(request) {
   try {
@@ -16,7 +16,8 @@ export async function POST(request) {
       );
     }
 
-    const ADMIN_PASSWORD_HASH = getAdminPasswordHash();
+    // Get password hash from the shared store (persistent)
+    const ADMIN_PASSWORD_HASH = passwordStore.get();
     const isValid = await bcrypt.compare(password, ADMIN_PASSWORD_HASH);
 
     if (isValid) {
