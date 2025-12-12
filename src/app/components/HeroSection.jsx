@@ -1,5 +1,6 @@
+// app/components/HeroSection.jsx
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
@@ -7,6 +8,29 @@ import Link from "next/link";
 import { FaGithub, FaLinkedin, FaInstagram, FaFacebook } from "react-icons/fa";
 
 const HeroSection = () => {
+  const [heroData, setHeroData] = useState({});
+
+  useEffect(() => {
+    const savedHero = localStorage.getItem("portfolioHero");
+    if (savedHero) {
+      setHeroData(JSON.parse(savedHero));
+    } else {
+      setHeroData({
+        name: "Shaik Shuaib Ahmed",
+        titles: ["Full Stack Developer", "Python Developer", "MERN Stack Developer"],
+        description: "Full-Stack Developer with 1 year of professional experience in Python (Django) and MERN stack development. Skilled in building scalable web applications, optimizing system performance, and collaborating in team-based projects. Seeking to leverage technical expertise and hands-on project experience to contribute to impactful software solutions.",
+        resumeUrl: "/Shuaib_Ahmed_resume.pdf",
+        heroImage: "/images/hero-image.png",
+        socialLinks: {
+          github: "https://github.com/Shuaib2698",
+          linkedin: "https://www.linkedin.com/in/shaik-shuaib-ahmed-b01459128",
+          instagram: "https://www.instagram.com/shuaib9845",
+          facebook: "https://www.facebook.com/profile.php?id=100007007058045"
+        }
+      });
+    }
+  }, []);
+
   return (
     <section className="section-box py-16 px-4 sm:px-8 lg:px-16">
       <div className="container mx-auto grid grid-cols-1 sm:grid-cols-12 items-center gap-8">
@@ -17,17 +41,13 @@ const HeroSection = () => {
           className="col-span-8 place-self-center text-center sm:text-left justify-self-start"
         >
           <h1 className="text-white mb-4 text-3xl sm:text-4xl lg:text-6xl font-extrabold">
-            Hello, I&#39;m Shaik Shuaib Ahmed
+            Hello, I&#39;m {heroData.name || "Shaik Shuaib Ahmed"}
             <br />
             <TypeAnimation
-              sequence={[
-                "Full Stack Developer",
-                1000,
-                "Python Developer",
-                1000,
-                "MERN Stack Developer",
-                1000,
-              ]}
+              sequence={
+                heroData.titles?.flatMap(title => [title, 1000]) || 
+                ["Full Stack Developer", 1000, "Python Developer", 1000, "MERN Stack Developer", 1000]
+              }
               wrapper="span"
               speed={150}
               style={{ 
@@ -39,22 +59,22 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-sm sm:text-base mb-6 lg:text-lg">
-            Full-Stack Developer with 1 year of professional experience in Python (Django) and MERN stack development. Skilled in building scalable web applications, optimizing system performance, and collaborating in team-based projects. Seeking to leverage technical expertise and hands-on project experience to contribute to impactful software solutions.
+            {heroData.description || "Full-Stack Developer with 1 year of professional experience..."}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-<Link
-  href="/#contact"
-  className="btn-cyan btn-hover-animation"
->
-  Hire Me
-</Link>
+            <Link
+              href="/#contact"
+              className="btn-cyan btn-hover-animation"
+            >
+              Hire Me
+            </Link>
 
-<Link
-  href="/Shuaib_Ahmed_resume.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-[rgb(var(--primary-color))] hover:bg-[rgba(var(--primary-color),0.8)] btn-hover-animation"
->
+            <Link
+              href={heroData.resumeUrl || "/Shuaib_Ahmed_resume.pdf"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-[rgb(var(--primary-color))] hover:bg-[rgba(var(--primary-color),0.8)] btn-hover-animation"
+            >
               <span className="block bg-black hover:bg-[#111] rounded-full px-5 py-2 text-white transition-all duration-300">
                 Download CV
               </span>
@@ -62,28 +82,28 @@ const HeroSection = () => {
           </div>
           <div className="socials flex flex-row gap-4 mt-6 justify-center sm:justify-start">
             <Link 
-              href="https://github.com/Shuaib2698" 
+              href={heroData.socialLinks?.github || "https://github.com/Shuaib2698"} 
               target="_blank"
               className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaGithub size={24} />
             </Link>
             <Link 
-              href="https://www.linkedin.com/in/shaik-shuaib-ahmed-b01459128" 
+              href={heroData.socialLinks?.linkedin || "https://www.linkedin.com/in/shaik-shuaib-ahmed-b01459128"} 
               target="_blank"
               className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaLinkedin size={24} />
             </Link>
             <Link 
-              href="https://www.instagram.com/shuaib9845" 
+              href={heroData.socialLinks?.instagram || "https://www.instagram.com/shuaib9845"} 
               target="_blank"
               className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
               <FaInstagram size={24} />
             </Link>
             <Link 
-              href="https://www.facebook.com/profile.php?id=100007007058045" 
+              href={heroData.socialLinks?.facebook || "https://www.facebook.com/profile.php?id=100007007058045"} 
               target="_blank"
               className="btn-hover-animation w-12 h-12 rounded-full border-2 border-[rgb(var(--primary-color))] flex items-center justify-center text-[rgb(var(--primary-color))] hover:bg-[rgb(var(--primary-color))] hover:text-black transition-all duration-300"
             >
@@ -118,7 +138,7 @@ const HeroSection = () => {
             <div className="absolute inset-4 rounded-full bg-[rgba(0,239,255,0.01)] overflow-hidden">
               <div className="w-full h-full flex items-center justify-center bg-transparent">
                 <Image
-                  src="/images/hero-image.png"
+                  src={heroData.heroImage || "/images/hero-image.png"}
                   alt="hero image"
                   className="object-contain w-full h-full"
                   width={450}

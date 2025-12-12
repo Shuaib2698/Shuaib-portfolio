@@ -194,3 +194,89 @@ body {
   position: relative;
   z-index: 1;
 }
+
+/* Image upload styling */
+.upload-preview {
+  transition: all 0.3s ease;
+}
+
+.upload-preview:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(32, 220, 35, 0.3);
+}
+
+/* Skill item editing */
+.skill-item {
+  transition: all 0.2s ease;
+}
+
+.skill-item:hover {
+  background-color: rgba(32, 220, 35, 0.1);
+  border-color: rgba(32, 220, 35, 0.5);
+}
+
+/* Certification links */
+.cert-link {
+  position: relative;
+  padding-left: 20px;
+}
+
+.cert-link::before {
+  content: "🔗";
+  position: absolute;
+  left: 0;
+  top: 2px;
+}
+
+/* Admin dashboard improvements */
+.admin-section {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
+}
+
+/* Progress bars */
+.upload-progress {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Add to your existing globals.css */
+.upload-preview {
+  transition: all 0.3s ease;
+  border: 2px dashed transparent;
+}
+
+.upload-preview:hover {
+  transform: scale(1.02);
+  border-color: rgba(32, 220, 35, 0.5);
+  box-shadow: 0 0 20px rgba(32, 220, 35, 0.2);
+}
+
+.upload-progress {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Admin section improvements */
+.admin-section input:focus, 
+.admin-section textarea:focus {
+  border-color: rgba(32, 220, 35, 0.8);
+  box-shadow: 0 0 0 2px rgba(32, 220, 35, 0.2);
+}
+
+/* Save button animation */
+.save-button {
+  transition: all 0.3s ease;
+}
+
+.save-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(32, 220, 35, 0.3);
+}
